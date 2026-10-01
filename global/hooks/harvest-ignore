@@ -1,0 +1,3 @@
+# Path prefixes whose sessions are never harvested (one per line, ~ allowed).
+~/Downloads        # VPN configs and other credential handling
+/tmp               # scratch and headless runs
