@@ -4,3 +4,4 @@ inbox/*
 .env
 *.local.json
 node_modules/
+__pycache__/

@@ -44,8 +44,9 @@ def ensure(event, cmd):
     if not any(h.get("command") == cmd for g in groups for h in g.get("hooks", [])):
         groups.append({"hooks": [{"type": "command", "command": cmd}]})
 ensure("SessionStart", f"{G}/global/hooks/inbox-status.sh")
+ensure("UserPromptSubmit", f"python3 {G}/global/hooks/coach.py")
 json.dump(s, open(path, "w"), indent=2); open(path, "a").write("\n")
-print("  cleanupPeriodDays=365, ask: git commit/push, SessionStart: inbox-status")
+print("  cleanupPeriodDays=365, ask: git commit/push, SessionStart: inbox-status, UserPromptSubmit: coach")
 EOF
 
 echo "5. memory/newEra: drop promoted habits from the index, fix renamed link"

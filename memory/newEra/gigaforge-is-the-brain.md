@@ -5,8 +5,9 @@ metadata:
   type: project
 ---
 
-`/home/mip/Desktop/workdir/sweeft/gigaforge` (private GitHub repo `gigaforge`,
-Giga pushes it) is the centre of the setup since 2026-10-01:
+`/home/mip/Desktop/workdir/sweeft/gigaforge` (private repo
+`git@github.com:Mipo8159/gigaforge.git`, branch `master`, first pushed
+2026-10-01 as `732a0f5`; Giga commits and pushes) is the centre of the setup:
 
 - `brain/CORE.md` is the always-on habits file, imported by `~/.claude/CLAUDE.md`.
   The six cross-project habits that used to live here (interview-then-loop,
@@ -17,9 +18,12 @@ Giga pushes it) is the centre of the setup since 2026-10-01:
 - Skills/agents/hooks are edited under `gigaforge/global/` and symlinked into
   `~/.claude` by `gigaforge/bin/install.sh`, which Giga runs (auto-mode blocks
   Claude from changing its own config/memory index, correctly).
-- Growth loop: `/retro` → `gigaforge/inbox/` → `/curate` → brain. The
-  automatic SessionEnd harvester was designed but **blocked by auto mode as
-  unauthorized persistence**. It needs Giga's explicit go-ahead before it's built.
+- Growth loop (2026-10-02): a UserPromptSubmit coach hook (`global/hooks/coach.py`)
+  injects cues + `brain/coaching.md` into every prompt; `/retro` updates the brain
+  and coaching focus, then commits and pushes gigaforge (Giga's standing request,
+  `brain/ me/ ai-craft/` only). The after-exit background learner (SessionEnd →
+  headless claude → auto-push) was blocked twice by auto mode, the second time
+  even with Giga's explicit request. Don't retry it; it's Giga's to enable.
 - clasico memory stays local (client-confidential), never in gigaforge.
 
 **Why:** Giga wants the brain to improve after every session from any project,

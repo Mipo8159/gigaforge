@@ -32,6 +32,20 @@ for f in $files; do
   done
 done
 
+# Client internals must never reach brain/ (it is pushed to GitHub).
+# Terms are case-insensitive; one per line in .githooks/client-terms.
+if [ -f .githooks/client-terms ]; then
+  for f in $files; do
+    case "$f" in ./brain/*|brain/*) ;; *) continue ;; esac
+    [ -f "$f" ] || continue
+    while IFS= read -r term; do
+      term="${term%%#*}"; term="$(echo "$term" | xargs)"; [ -z "$term" ] && continue
+      lines=$(grep -nio -- "$term" "$f" 2>/dev/null | cut -d: -f1 | sort -u | tr '\n' ',' | sed 's/,$//')
+      if [ -n "$lines" ]; then echo "  ✗ $f lines $lines: client term"; hits=1; fi
+    done < .githooks/client-terms
+  done
+fi
+
 if [ $hits -ne 0 ]; then
   echo "pre-commit: possible secrets found (values masked). Redact, or commit with --no-verify if a false positive."
   exit 1

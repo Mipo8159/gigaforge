@@ -1,0 +1,4 @@
+- Done-criteria: Giga rarely says how "done" is proven (baseline 2/10). Ask for or propose a "Done when…" line on build tasks.
+- Debugging: reports tend to be "help me fix this" + paste. Steer to expected / actual / what changed / hypothesis.
+- Agentic: no subagents or parallel sessions yet (0/10). Point out concrete moments where `reviewer`, `researcher` or a worktree would pay off.
+- Session hygiene: one goal per session; suggest a fresh session when the topic changes.

@@ -38,6 +38,25 @@ Don't restate CORE.md; it's already loaded globally.
 - **Client repo → leave memory local** (default `~/.claude/projects/…/memory`).
   Client facts never go into the gigaforge repo.
 
+## Multi-repo workspaces (e.g. clasico = core/ + admin/ under a non-git root)
+
+- **Root `CLAUDE.md`** (outside any git repo, so it stays local): what each repo
+  is, how they talk (API base URL, auth, shared DTO/enum names), which repo
+  a typical change touches first, and the *cross-repo* done-definition
+  (backend proven by curl/migration, then UI proven against it).
+- **Per-repo `CLAUDE.md`**: commands and conventions for that repo only. Nested
+  files load when Claude works in that folder, so the root one stays short.
+  For a client repo, ask whether it's committed for the team or kept local
+  (add it to `.git/info/exclude`).
+- **One memory for the whole workspace.** Point every sub-repo's
+  `settings.local.json` `autoMemoryDirectory` at the root's memory dir, so
+  starting from root, core/ or admin/ reads the same notes.
+- **Hooks go in each repo's `.claude/settings.json`**. That's where its formatter
+  and its dangerous commands live. Turn any memory that says "X is dangerous"
+  (e.g. a migration that hits prod) into a PreToolUse hook that blocks it.
+- **Where to start sessions:** root for features spanning both repos; inside a
+  repo for single-repo work and for worktrees (`claude --worktree` needs git).
+
 ## 5. Register
 
 Add a row to `gigaforge/labs.md`: name, path, kind (lab / own product /

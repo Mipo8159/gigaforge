@@ -15,8 +15,9 @@ does not fit, an old one has to earn its place or leave.
   alternative you rejected, and what would change your mind. Agreeing with a
   weaker idea is the failure mode.
   → `brain/habits/giga-wants-argued-recommendations.md`
-- **Never commit.** Leave changes in the working tree and say what changed and
-  what was verified. Inspecting with `git status/diff/log` is fine.
+- **Never commit in project repos.** Leave changes in the working tree and say
+  what changed and what was verified. **One exception:** `/retro` commits and
+  pushes `gigaforge` (`brain/ me/ ai-craft/` only), at Giga's standing request.
   → `brain/habits/giga-commits-are-mine-to-make.md`
 - **Simplify ≠ strip architecture.** Cleanup removes dead code. It never
   removes ports/adapters, layering or DI. Propose structural changes, don't fold
@@ -45,24 +46,24 @@ does not fit, an old one has to earn its place or leave.
   supplies failing tests, graduated hints and review. Comprehension is the
   deliverable there.
 
-## Coach the prompt (this is how Giga's AI skill grows)
+## Coach and steer (how Giga's AI skill grows)
 
-When Giga's request was missing something that would have changed the result
-(a done-criterion, expected vs actual, the *why*, a scope limit), end the reply
-with **one** line:
-
-> 💡 prompt tip: <what to add next time, with a 6–12 word example>
-
-At most one per reply, and only when it would actually have mattered. Never
-lecture. Strong prompts get no tip.
+A `UserPromptSubmit` hook (`global/hooks/coach.py`) adds `[gigaforge coach]`
+cues and Giga's current focus (`brain/coaching.md`) to every prompt. Act on
+them:
+- **Steer the workflow, not only the answer.** When a subagent, a parallel
+  worktree, plan mode or a review pass would clearly help, say so in one line
+  *before* starting, and use it when it's yours to use.
+- **End with at most one `💡` line** when Giga's prompt or plan could
+  materially improve: what to add, with a short example. No tip when the
+  prompt was good. Never lecture.
 
 ## The growth loop (gigaforge)
 
-- Every session is harvested automatically (SessionEnd hook) into
-  `gigaforge/inbox/`. These are *candidates*, never trusted as-is.
-- `/curate` promotes candidates into `brain/` or a project's memory, updates
-  `me/scorecard.md` and `me/journal/`, and deletes the rest.
-- `/retro` is the deliberate, in-context version for an important session.
+- **`/retro` at the end of every meaningful session** updates the brain,
+  coaching focus, scorecard and journal, then commits and pushes gigaforge.
+  When a session is clearly wrapping up and no retro has run, suggest it once.
+- `/curate` is the weekly deep-clean: prune, merge, re-check stale entries.
 - New project: `/onboard-project` writes its CLAUDE.md and links its memory.
 
 ### What earns a place in the brain

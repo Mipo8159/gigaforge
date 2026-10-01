@@ -12,19 +12,17 @@ better over time. It does three jobs:
 ## How it fits together
 
 ```
-  any project session (clasico, issue-flow, auxiliary, …)
-        │   loads ~/.claude/CLAUDE.md ──@import──► brain/CORE.md   (always-on habits)
-        │   + the project's own CLAUDE.md  + the project's memory
-        ▼
-  end of session ── /retro ──► inbox/   (untrusted candidates, gitignored)
-                                  │
-                         /curate  │  4-part bar: reusable · evidenced ·
-                                  │  changes behaviour · new
-             ┌────────────────────┼─────────────────────┬──────────────────┐
-             ▼                    ▼                     ▼                  ▼
-     brain/habits,patterns   ai-craft/prompt-log   me/scorecard,       project memory
-     (+ CORE.md if universal)                      concepts, journal   (client = local only)
+ every prompt ──► coach hook (global/hooks/coach.py, ~30 ms, no model call)
+                  adds cues + brain/coaching.md focus → Claude steers: done-criteria,
+                  debug protocol, agents / worktrees / plan mode, one 💡 tip
+ every session ─► reads brain/CORE.md (via ~/.claude/CLAUDE.md) + project CLAUDE.md + memory
+ end: /retro ───► applies lessons to brain/ · coaching.md · scorecard · journal · prompt-log
+                  ──► pre-commit (secrets + client terms) ──► commit + push gigaforge
+ weekly /curate ► prune, merge, re-check stale entries
 ```
+
+Coaching builds up because `/retro` rewrites `brain/coaching.md` from evidence:
+weaknesses you've fixed drop off, and new repeated ones get added.
 
 ## Layout
 

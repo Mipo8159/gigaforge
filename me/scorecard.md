@@ -28,7 +28,22 @@ Evidence: 958 prompts / 126 sessions, 2026-06-01 → 2026-10-01; tool logs of th
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 2026-10 | 8 | 6 | 2 | 3 | 3 | 0 | 1 | 0 | 1 | 0 | 3 | baseline |
 
-## Session signals (appended by /curate from harvest/retro files)
+## Prompt-signal trend (`bin/signals-report.py`)
+
+Baseline, replayed from history through the coach heuristics (2026-10-02).
+They're rough regex signals: read the direction, not the decimals.
+
+| month | prompts | done% (↑) | no_done (↓) | debug_no_hypothesis (↓) | asks_status (↓) | vague (↓) | multi_task (↓) | research (↓) |
+|---|---|---|---|---|---|---|---|---|
+| 2026-06 | 222 | 10% | 31% | 10% | 0% | 2% | 0% | 0% |
+| 2026-07 | 85 | 16% | 19% | 5% | 0% | 0% | 0% | 1% |
+| 2026-08 | 399 | 21% | 17% | 5% | 1% | 1% | 1% | 0% |
+| 2026-09 | 181 | 56% | 8% | 6% | 2% | 1% | 1% | 1% |
+| 2026-10 | 16 | 100% | 0% | 0% | 0% | 0% | 0% | 6% |
+
+Live months come from `bin/signals-report.py` (coach hook log). Compare at each monthly re-score.
+
+## Session signals (appended by /retro)
 
 | Date | Project | Done-criteria | Plan | Debug style | Proof | Subagents/parallel | Review | Giga coded |
 |---|---|---|---|---|---|---|---|---|
