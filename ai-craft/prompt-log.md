@@ -82,3 +82,10 @@ The goal is to *see* your own patterns change over the months.
 - **Why:** the first prompt left the deliverable open, so the answer covered infra, mobile and
   backend broadly. The second named one yes/no question and what counts as done. That got a
   firm answer with its reasoning in one round.
+
+## 2026-10-02: build prompt with a decidable, counted done (good)
+- **Prompt:** "define done, when user gets push notification sent when admin approves or rejects … if 2 rejects and 1 approval, 3 push notifications should be sent to the creator."
+- **Why it worked:** a concrete example with a count turned "notify on review" into a test
+  (3 jobs for 3 reviews, 409 → no 4th). It drove the jobId-per-entity design and the local proof.
+- **Still missing:** env and access ("local Docker; no real device token; SDQA after push").
+  That came 3 prompts later and cost an extra verification round.

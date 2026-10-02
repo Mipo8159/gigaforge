@@ -52,3 +52,9 @@ Rules:
 
 Related: [[working-style-interview-then-autonomous-loop]] (the split belongs in
 that one up-front interview), [[giga-wants-argued-recommendations]].
+
+**2026-10-02 (push readiness check), worked:** Giga's standing request is "always squeeze the
+most out of agents, skills and hooks." The split was a `verifier` agent on cloud infra plus a
+`researcher` on provider semantics, both in the background, while Claude built the production
+image. A loaded skill handled the secret-hook block. Three layers were done in one wall-clock
+pass, and the infra half took the verifier ~9 min that would otherwise have run serially.
