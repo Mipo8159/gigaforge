@@ -1,6 +1,6 @@
 ---
 name: secrets-land-in-readme
-description: "Live Google client secrets have twice been pasted into auxiliary's README.md; always scan that file before committing it, and mask the output when you do."
+description: "Giga records the commands and logins they used in a README, so secrets end up there (three times, two projects); scan any README in the diff before handover, and mask what the scan prints."
 metadata:
   node_type: memory
   type: feedback
@@ -35,3 +35,10 @@ not yet built.
 
 Related: [[auxiliary-is-the-app-auctionize-is-legacy]],
 [[auxiliary-free-plan-blocked-four-services]]
+
+**Third time, another project (2026-10-02):** a client repo's uncommitted
+README held an environment admin password, a VPN host and password, and user
+emails. The background reviewer caught it, reported it without the values, and
+the handover told Giga to remove it before staging. So the habit isn't tied to
+one repo: **any README in the working tree gets scanned at handover**, and
+reviewer prompts should ask for it.

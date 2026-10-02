@@ -61,3 +61,16 @@ The goal is to *see* your own patterns change over the months.
 - **Why:** "what changed" was the best part and found bug 1 fast. IDs, the exact error and
   "right after submit" would have removed about 10 tool calls of searching, and stating
   access up front avoids dead ends mid-investigation.
+
+### 2026-10-02: "Done when" that can't be checked, and a scope that hid the real gap
+- **Before:** "check admin repository, add the changes to admin side that allows SUPER_ADMIN role
+  user to change the user grade … done when: admin can successfully change user grades without
+  any issues. use agentic workflow"
+- **After:** "Let only the top admin role change a user's grade (all enum values). Check where it's
+  enforced, admin and core. Done when, on local core (I'll run it on :3010, login in
+  `.env.local`): the top admin sets all 4 grades via the UI, the DB matches, and a lower admin gets
+  403. Background reviewer before handover."
+- **Why:** "admin side" was the wrong layer: the server let the lower role write the field, so a
+  UI-only fix would have passed the stated criterion and still been open. "Without any issues"
+  named no environment, user or check, and missing access (core not running, no login) pushed the
+  live proof into a second round.

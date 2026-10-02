@@ -18,6 +18,7 @@ else, or a doc, get it). Raise a level only on evidence, and record the evidence
 | Serverless on AWS (Lambda, DynamoDB, Cognito) | aws | build | auxiliary deployed 2026-08-18 | explain: single-table design aloud |
 | DynamoDB transactional counters | aws | seen | job/quota model (planned) | build in auxiliary upload pipeline |
 | Kubernetes | k8s | — | — | track 3 |
+| Role-based access at the API layer | security | seen | 2026-10-02: UI-only role gate vs server route | explain: why hiding a button isn't access control |
 | Context engineering (CLAUDE.md, memory, skills) | ai | explain | built gigaforge with Claude | build: own skill with evals |
 | Agent orchestration (subagents, background review, worktrees, hooks as guards) | ai | seen | 2026-10-02: asked how agents/hooks/skills were used; saw a background reviewer catch a rollout risk | build: launch a worktree session yourself for a parallel half |
 | Agent loops / tool use / MCP | ai | seen | `mcp/` teaching server | build: finish the README syllabus |
