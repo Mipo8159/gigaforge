@@ -1,6 +1,6 @@
 ---
 name: secrets-land-in-readme
-description: "Giga records the commands and logins they used in a README, so secrets end up there (three times, two projects); scan any README in the diff before handover, and mask what the scan prints."
+description: "Inspect unknown files that may hold secrets by shape only; never print a masked copy. Giga records the commands and logins they used in a README, so secrets end up there (three times, two projects); scan any README in the diff before handover, and mask what the scan prints."
 metadata:
   node_type: memory
   type: feedback
@@ -42,3 +42,23 @@ emails. The background reviewer caught it, reported it without the values, and
 the handover told Giga to remove it before staging. So the habit isn't tied to
 one repo: **any README in the working tree gets scanned at handover**, and
 reviewer prompts should ask for it.
+
+**Fourth time, and a masking failure (2026-10-02):** a client workspace held
+only a plaintext notes file with a root SSH login, IPs and passwords. Claude
+"masked" it with a `key: value` sed regex. Two bare passwords had no separator,
+so the regex didn't match them and they printed in full. Regex masking only
+works when you already know the format, and with an unknown file you don't.
+
+**How to apply (unknown file that may hold secrets):**
+- Print **shape only**: `wc -l`, and per line its length and the text before the
+  first `:`/`=` (`awk -F'[:=]' '{print NR, length($0), $1}'`). Never print a
+  "masked" copy of the whole file.
+- If a value leaks anyway, say so in the handover and suggest rotating it.
+- Fix in that case: move the file into a 700 home-dir secrets folder (file 600),
+  and add a project hook that denies any tool call naming it.
+
+5. **Fetching a secret for a test:** a plugin hook blocks agent-side `GetSecretValue` (CLI or
+   SDK, even inside a script or container). The sanctioned path is `asm-exec` with
+   `{{resolve:secretsmanager:...}}`, but it needs a local Secrets Manager Agent or the AWS MCP
+   endpoint. When neither is reachable, don't route around the hook. Write the probe so it
+   prints no secret, and hand Giga a one-line `! <command>` to run. (2026-10-02, FCM dry-run.)
