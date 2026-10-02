@@ -74,3 +74,11 @@ The goal is to *see* your own patterns change over the months.
   UI-only fix would have passed the stated criterion and still been open. "Without any issues"
   named no environment, user or check, and missing access (core not running, no login) pushed the
   live proof into a second round.
+
+### 2026-10-02: "analyze following" vs. a question with a decidable done-criterion
+- **Before:** "analyze following" + a pasted ticket (then a steer: "not too long").
+- **After (Giga's own second prompt, good):** "check if backend plays any decisive role …
+  definition of done is the definitive answer whether this could be achieved from the backend side"
+- **Why:** the first prompt left the deliverable open, so the answer covered infra, mobile and
+  backend broadly. The second named one yes/no question and what counts as done. That got a
+  firm answer with its reasoning in one round.
