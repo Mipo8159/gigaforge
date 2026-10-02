@@ -44,6 +44,11 @@ Rules:
   of several repos needs the file in each repo's `.claude/agents/`. Symlink it to
   one workspace copy and hide it via `.git/info/exclude`, not `.gitignore`, so
   nothing lands in a client repo by accident.
+- **Prove a Claude-config change by probing it.** `claude agents` manages
+  background agents and does not list definitions. Instead run, per directory,
+  `claude -p --model haiku "list your subagent types…"`. Caveat: each probe goes
+  through the coach hook and is logged to `inbox/signals.jsonl` as a real prompt,
+  which skews the monthly rates. Note the probe timestamps so they can be removed.
 
 Related: [[working-style-interview-then-autonomous-loop]] (the split belongs in
 that one up-front interview), [[giga-wants-argued-recommendations]].
