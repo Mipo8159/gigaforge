@@ -25,7 +25,7 @@ Claude's to launch:
 | Analyze, broad (logs, many files, docs) | `Explore` / `researcher` subagent, or Bash `run_in_background` | Anything that may exceed ~60 s or floods context. Keep the conclusion, not the dump. |
 | Analyze, narrow (one code path) | main session | Subagents start cold; don't spawn for a 3-file read. |
 | Fix, independent halves (backend vs UI repo) | separate worktree, launched by Giga: `cd <repo> && claude -w <task>` | Name the moment and the command; Giga launches it so they practise it. |
-| Test / verify | background task or `claude -p` one-shot | Long builds, migrations, E2E runs. |
+| Test / verify | `verifier` subagent in the background, or `claude -p` one-shot | Reruns the original repro plus one neighbour; reports VERIFIED / FAILED / PLAUSIBLE / BLOCKED. Use it before saying "confirmed". |
 | Review | `reviewer` subagent in the background | Over ~100 lines, or auth/money/data/infra (CORE.md rule). |
 
 Rules:
@@ -35,10 +35,15 @@ Rules:
 - **Argue the split.** Parallelism has costs: cold-start context, merge
   conflicts, and Giga's attention. Say which part stays serial and why. A small
   single-file fix does not get a worktree.
-- **Separate agent configs** live in `gigaforge/global/agents/`. Only
-  `researcher` and `reviewer` exist today. Propose a new role (for example a
-  `verifier` that reruns a repro and reports evidence) only when a session shows
-  it would have been used, never pre-emptively.
+- **Separate agent configs** live in `gigaforge/global/agents/`: `researcher`,
+  `reviewer`, `verifier` (added 2026-10-02 after Claude called a diagnosis
+  "confirmed" too early). Propose a new role only when a session shows it would
+  have been used, never pre-emptively.
+- **Project overrides:** a project agent with the same name replaces the global
+  one. Agent discovery does **not** walk up to parent directories: a workspace
+  of several repos needs the file in each repo's `.claude/agents/`. Symlink it to
+  one workspace copy and hide it via `.git/info/exclude`, not `.gitignore`, so
+  nothing lands in a client repo by accident.
 
 Related: [[working-style-interview-then-autonomous-loop]] (the split belongs in
 that one up-front interview), [[giga-wants-argued-recommendations]].
