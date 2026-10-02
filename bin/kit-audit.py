@@ -37,6 +37,8 @@ INJECTION = re.compile(r"(?i)\b(ignore (all )?(previous|prior|above) (instructio
                        r"|(run|execute|install|delete|remove|push|deploy|send|upload)\b[^.\n]{0,40}\bwithout (asking|confirmation|confirming)"
                        r"|(always|automatically) (run|execute)\b[^.\n]{0,40}\b(without|no need to) (ask|confirm)"
                        r"|do not (tell|inform|mention (it |this )?to) the user|bypass (the )?permission)")
+# "Never run X without asking" is a safety rule, not an injection: skip phrases negated earlier in the line.
+NEGATED = re.compile(r"(?i)\b(never|don't|do not|must not|mustn't|shouldn't|should not|no one may|avoid)\b[^.!?\n]*$")
 # Documented examples, not credentials: truncated tokens ("eyJhb..."), <angle> slots, ${VARS}, and the
 # stock dev passwords in compose/connection-string examples. Only for the shape-based rules below;
 # provider-prefixed keys (AKIA, sk-ant-, ghp_) are never excused this way.
@@ -136,7 +138,7 @@ def scan_prose(a, path, text, injection=True):
         if HIDDEN.search(line):
             a.add("hidden-unicode", "high", path, i, "zero-width / bidi control character")
         m = INJECTION.search(line) if injection and not fence else None
-        if m and not quoted(line, m.start()):
+        if m and not quoted(line, m.start()) and not NEGATED.search(line[:m.start()]):
             a.add("injection-phrase", "high", path, i, "auto-run / override phrasing")
         if B64.search(line):
             a.add("base64-blob", "medium", path, i, "long base64-like blob")
