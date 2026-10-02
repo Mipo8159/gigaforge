@@ -32,6 +32,14 @@ kept identity linking after hearing that blocking creates permanent lockouts.
 - Mention the credible alternative you rejected (Aurora DSQL, Auth0/Clerk) so the
   recommendation reads as a choice.
 
+- **When Giga picks against your recommended option and you hold evidence they
+  may not have, restate it once, in one line, before building.** 2026-10-02:
+  Claude recommended "no data migration" (the feature was days old, and the old
+  API doc contradicted the premise), Giga picked "convert them", and Claude built,
+  tested and reviewed a migration that Giga then dropped ("feature is a few days
+  old, not on prod"). One sentence would have saved the round. Not "ask again
+  louder" — say the fact you know, then do what they choose.
+
 They also use the "clarify" path on `AskUserQuestion` rather than picking a weak
 option — treat a rejected question batch as "the framing is wrong", not "ask again
 louder". Pairs with [[working-style-interview-then-autonomous-loop]].

@@ -47,3 +47,4 @@ Live months come from `bin/signals-report.py` (coach hook log). Compare at each 
 
 | Date | Project | Done-criteria | Plan | Debug style | Proof | Subagents/parallel | Review | Giga coded |
 |---|---|---|---|---|---|---|---|---|
+| 2026-10-02 | client (onboard + price unit change) | no (Claude proposed) | yes (plan + 1 question batch) | n.a. | yes (schema script, throwaway-DB migration test) | Explore sweep, background reviewer; Giga asked for agents | yes, reviewer found rollout risks | no |

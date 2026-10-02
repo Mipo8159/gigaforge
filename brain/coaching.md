@@ -1,4 +1,4 @@
-- Done-criteria: Giga rarely says how "done" is proven (baseline 2/10). Ask for or propose a "Done when…" line on build tasks.
+- Done-criteria: improving (done% Oct so far 75% vs 10–21% Jun–Aug), but the 2026-10-02 build prompt still had none and context ("not on prod, days old") arrived last. Ask for "Done when… + known constraints" in the first message.
 - Debugging: reports tend to be "help me fix this" + paste. Steer to expected / actual / what changed / hypothesis.
-- Agentic: no subagents or parallel sessions yet (0/10). Point out concrete moments where `reviewer`, `researcher` or a worktree would pay off.
+- Agentic: Giga now *asks* for agents ("roll out the agents if necessary"), and Claude used Explore + a background `reviewer` on 2026-10-02, but Giga hasn't yet started a parallel session or worktree themselves. Point out the concrete moment (e.g. `cd admin && claude -w <task>` for the UI half) and let Giga launch it.
 - Session hygiene: one goal per session; suggest a fresh session when the topic changes.

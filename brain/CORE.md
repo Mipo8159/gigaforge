@@ -15,6 +15,9 @@ does not fit, an old one has to earn its place or leave.
   alternative you rejected, and what would change your mind. Agreeing with a
   weaker idea is the failure mode.
   → `brain/habits/giga-wants-argued-recommendations.md`
+- **Short first; "how does X work" gets a map.** ≤10 lines or ≤5 steps, long
+  version on request; inventory questions get one table + honest gaps.
+  → `brain/habits/answer-shape-short-first-map-for-how.md`
 - **Never commit in project repos.** Leave changes in the working tree and say
   what changed and what was verified. **One exception:** `/retro` commits and
   pushes `gigaforge` (`brain/ me/ ai-craft/` only), at Giga's standing request.
