@@ -36,11 +36,11 @@ Evidence is one dated, generalised line: no client names, URLs or schemas.
 | skill `secure-coding` | ecc | 2026-10-03 | 0.4 | — |
 | checklist `typescript` | ecc | 2026-10-03 | 0.4 | — |
 | checklist `react` | ecc | 2026-10-03 | 0.4 | — |
-| checklist `python` | ecc | 2026-10-03 | 0.4 | — |
+| checklist `python` | ecc | 2026-10-03 | 0.5 | 2026-10-03 · own python tooling (kit/guard) · reviewer flagged real issues it lists (input validation, fail-open paths) |
 | checklist `go` | ecc | 2026-10-03 | 0.4 | — |
 | checklist `database` | ecc | 2026-10-03 | 0.4 | — |
-| checklist `security` | ecc | 2026-10-03 | 0.4 | — |
-| checklist `silent-failures` | ecc | 2026-10-03 | 0.4 | — |
+| checklist `security` | ecc | 2026-10-03 | 0.5 | 2026-10-03 · own config/security tooling · secret-masking and unsafe-default findings were real |
+| checklist `silent-failures` | ecc | 2026-10-03 | 0.5 | 2026-10-03 · own python tooling · fail-open hook paths and swallowed errors were real findings |
 | skill `contract-first` | ecc | 2026-10-03 | 0.4 | — |
 | skill `council` | ecc | 2026-10-03 | 0.4 | — |
 | skill `production-audit` | ecc | 2026-10-03 | 0.4 | — |

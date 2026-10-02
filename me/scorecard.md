@@ -39,7 +39,9 @@ They're rough regex signals: read the direction, not the decimals.
 | 2026-07 | 85 | 16% | 19% | 5% | 0% | 0% | 0% | 1% |
 | 2026-08 | 399 | 21% | 17% | 5% | 1% | 1% | 1% | 0% |
 | 2026-09 | 181 | 56% | 8% | 6% | 2% | 1% | 1% | 1% |
-| 2026-10 | 16 | 100% | 0% | 0% | 0% | 0% | 0% | 6% |
+| 2026-10 | 49 | 67% | 10% | 10% | 2% | 0% | 12% | 0% |
+
+(2026-10 row refreshed at /curate 2026-10-03, after dropping 7 `claude -p` probe rows from 2026-10-02 15:38.)
 
 Live months come from `bin/signals-report.py` (coach hook log). Compare at each monthly re-score.
 
@@ -53,3 +55,4 @@ Live months come from `bin/signals-report.py` (coach hook log). Compare at each 
 | 2026-10-02 | client (OAuth consent-dialog domain, analysis) | yes on 2nd prompt ("definitive answer whether backend can do it"); 1st was "analyze following" | n.a. | n.a. | partial (code read + order-of-events; device check pending) | none (3 small greps, serial) | no (no diff) | no |
 | 2026-10-02 | client (onboard remote-only server workspace) | n.a. (skill invocation; Claude stated proof: hook test table) | yes (one 4-question batch) | n.a. | yes (11-case guard table, all pass after a `\b` fix) | none (empty folder, nothing to sweep) | no (diff <100 lines) | no |
 | 2026-10-02 | client (push-repo explainer → review-result push feature) | yes, counted ("2 rejects + 1 approval = 3 pushes"); env/access came later | yes (recommendation table + 4-question batch, then autonomous) | n.a. | yes (local 3-job run, 409 control, prod image build; FCM topic dry-run handed to Giga) | background reviewer; verifier + researcher in parallel; secrets skill; Giga asked "always squeeze agents/skills/hooks" | yes, reviewer found retry-resends-after-send | no |
+| 2026-10-03 | gigaforge (ECC analysis → library absorb → kit + guard + rollout to 10 projects) | partly (goal + time budget; no done-line, no action boundaries) | yes (Claude plan + one 4-question batch, then autonomous) | n.a. | yes (167-case selftest, mutation checks, real `claude -p` probes, dry-run before every apply) | heavy: 4 analysis agents, 6 forks, claude-code-guide doc check, 4 background reviews (25+ issues found and fixed) | yes, 4 reviewer passes | no |

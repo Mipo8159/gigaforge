@@ -24,6 +24,16 @@ A guard that silently passes or wrongly blocks is worse than none.
   lesson text *named* that path. A "deny any mention" secrets rule is
   deliberately broad. Accept that cost, and write such text from a scratchpad
   script (`python3 script.py`) so the command line carries no trigger words.
+- 2026-10-03: a global destructive-command guard passed its own 30-case table,
+  then two background review passes found 25 holes. Among them: `git reset
+  --hard … && rm -rf node_modules` was allowed whole (a "safe rm" regex anchored
+  only at `$`); an apostrophe in a `# don't …` comment opened a phantom quote that
+  hid every later command; `git -C <dir>` and `kubectl -n <ns>` slipped past
+  verb patterns; and "deny once, allow the identical retry" let the model
+  approve its own destructive command in auto mode. Fix: a quote-, comment- and
+  heredoc-aware segment scanner that unwraps `bash -c`/`ssh`/`$(…)`, skips
+  global options, returns **ask** (a human confirms) for destructive ops, and
+  **fails closed** (ask) on unbalanced quoting or >64 KB input.
 
 **How to apply:**
 - Test after install / inside the real repo, not only in a scratch folder.
@@ -35,3 +45,15 @@ A guard that silently passes or wrongly blocks is worse than none.
   (2026-10-02), so expect them to guard your own next command.
 - Command-name rules: anchor at segment start and end with `(\s|$)`, never
   `\bname\b` (`ssh` vs `ssh-keygen`, `git` vs `git-lfs`).
+- A shell guard is a parser: tokenise per segment, unwrap wrappers, and when
+  parsing fails, **ask** rather than allow. Irreversible ops get `ask`, never
+  "deny once": a retry the model can trigger is not a human confirmation.
+- Prove the suite can fail: re-inject a fixed bug and watch it go red. Every
+  fixed hole becomes a dated table row (`bin/kit selftest`).
+- After rewriting a guard in response to review, review it again: the
+  rewrite itself was where the second pass found the blocker.
+
+**Signal:** writing or changing any hook, permission rule or scanner that
+decides allow/deny on command text.
+**Next time:** table first (deny, ask, innocent look-alikes, wrapped and
+chained forms), fail-closed default, background reviewer on the rewrite.

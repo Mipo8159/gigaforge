@@ -89,3 +89,16 @@ The goal is to *see* your own patterns change over the months.
   (3 jobs for 3 reviews, 409 → no 4th). It drove the jobId-per-entity design and the local proof.
 - **Still missing:** env and access ("local Docker; no real device token; QA env after push").
   That came 3 prompts later and cost an extra verification round.
+
+## 2026-10-03: a long autonomous delegation (good scope, missing boundaries)
+- **Before:** "spend some more time, somewhere around 20-30 minutes, to reanalyze everything the ECC
+  repository does and absorb every precious detail into gigaforge … until we are left with a kit
+  that is easy to use and adjust to all the existing projects."
+- **After:** "Absorb ECC's architecture into gigaforge as a kit for my projects. Done when: `kit
+  apply` works on a scratch clone and `kit doctor --all` is clean. Budget ~30 min. Allowed: edit
+  and test inside gigaforge + temp dirs. Not allowed without asking: other repos, ~/.claude,
+  commits, pushes."
+- **Why:** the goal and the time budget were clear, and the run was autonomous as wanted. But with
+  no done-line or action boundary, Claude chose both. It stopped twice to hand back outward actions
+  (install, other repos), and the session ran far past the budget while review passes kept finding
+  issues. A boundary line turns "may I?" stops into decisions made up front.
