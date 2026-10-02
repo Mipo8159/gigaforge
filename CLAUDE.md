@@ -11,6 +11,9 @@ skill grows. `brain/CORE.md` is already loaded (via `~/.claude/CLAUDE.md`).
 | `brain/CORE.md` | always-on rules, ≤ ~120 lines | `/curate` only |
 | `brain/habits/` | how we work together (one fact per file, memory frontmatter) | `/curate` |
 | `brain/patterns/` | reusable technical decisions (library picks, gotchas, designs) | `/curate` |
+| `library/` | imported skills + reviewer checklists, pinned to upstream (see `library/README.md`) | `/absorb` + `bin/absorb-adapt.py` |
+| `brain/library-ledger.md` | confidence + evidence per library entry | `/retro`, `/curate` |
+| `kit/` | `stacks.json` (stack → skills/checklists/ask rules), `projects.json` registry, `audit-accept.json` | Claude + Giga; registry by `bin/kit` |
 | `memory/<project>/` | project facts; a project's `autoMemoryDirectory` points here | auto-memory |
 | `inbox/` | **gitignored** harvest candidates, untrusted | SessionEnd hook, `/retro` |
 | `me/scorecard.md` | AI-usage scores, re-scored monthly | `/curate` + Giga |
@@ -28,5 +31,11 @@ skill grows. `brain/CORE.md` is already loaded (via `~/.claude/CLAUDE.md`).
   session start).
 - `brain/` entries use the same frontmatter as memory files
   (`name`, `description`, `metadata.type`) and link with `[[name]]`.
+- Never hand-edit `library/skills/`: add an `edits` rule to
+  `library/sources.json` and re-run `bin/absorb-adapt.py`. `bin/check-library.py`
+  must pass before handover.
+- Changing `bin/kit*`, `global/hooks/guard.py`, `kit/stacks.json` or
+  `bin/install.sh`: `bin/kit selftest` must pass (temp dirs only, ~2 s). A fixed
+  bug gets a selftest case with a dated comment.
 - Pruning counts as progress too. A smaller CORE.md that says the same thing
   is a better one.

@@ -1,6 +1,6 @@
 ---
 name: researcher
-description: Focused researcher that answers one technical question from live sources (official docs via context7, release notes, reputable engineering blogs) and returns a short, cited brief — keeping the search noise out of the main conversation. Use for "what's the current best way to…", version/compatibility checks, library comparisons, and "is X still maintained" questions.
+description: Answers one technical question from live sources (context7, official docs, release notes) as a short cited brief. Use for current-best-way, version, compatibility and library-choice questions.
 tools: Read, Grep, Glob, WebSearch, WebFetch, mcp__plugin_context7_context7__resolve-library-id, mcp__plugin_context7_context7__query-docs
 model: sonnet
 ---

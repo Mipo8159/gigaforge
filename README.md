@@ -18,7 +18,11 @@ better over time. It does three jobs:
  every session ─► reads brain/CORE.md (via ~/.claude/CLAUDE.md) + project CLAUDE.md + memory
  end: /retro ───► applies lessons to brain/ · coaching.md · scorecard · journal · prompt-log
                   ──► pre-commit (secrets + client terms) ──► commit + push gigaforge
- weekly /curate ► prune, merge, re-check stale entries
+ weekly /curate ► prune, merge, re-check stale entries; kit doctor/audit/budget
+ every tool call ► guard hook (global/hooks/guard.py): no-verify block, destructive
+                  deny-once, config protection, compact hint; SessionStart: handoff
+ outside ───────► /absorb pulls vetted upstream skills into library/; the ledger
+                  promotes what real sessions prove (brain/library-ledger.md)
 ```
 
 Coaching builds up because `/retro` rewrites `brain/coaching.md` from evidence:
@@ -35,7 +39,9 @@ weaknesses you've fixed drop off, and new repeated ones get added.
 | `ai-craft/` | Track 0, working with Claude: drills, prompt log |
 | `tracks/` | technical curriculum (messaging → scaling → k8s → AWS → AI eng) |
 | `labs.md` | every connected project and where its memory lives |
-| `bin/` | `install.sh` (wire into ~/.claude), `link-project.sh` |
+| `library/` | imported skills + review checklists, pinned upstream (`/absorb`) |
+| `kit/` | per-project layer: `stacks.json`, project registry. **Start here: `kit/README.md`** |
+| `bin/` | `install.sh` (wire into ~/.claude), `kit` (detect/apply/doctor/audit/budget), absorb + check scripts |
 | `.githooks/` | secret scan on commit (prints masked findings only) |
 
 ## Commands you'll use
@@ -48,7 +54,9 @@ weaknesses you've fixed drop off, and new repeated ones get added.
 | `/debug-protocol` | anything broken |
 | `/onboard-project` | first session in a repo without a CLAUDE.md |
 | `/build-loop` | "build this until it works, don't keep asking me" |
-| agents: `reviewer`, `researcher` | second opinion on a diff; cited research brief |
+| `/absorb` | pull improvements from an upstream source (ECC) into `library/` |
+| `kit apply <repo>` · `kit doctor --all` | wire any project; check every project's health |
+| agents: `reviewer`, `researcher`, `verifier` | review with stack checklists; cited research; rerun-the-repro proof |
 
 ## Setup (also on a new machine)
 

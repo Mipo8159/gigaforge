@@ -20,11 +20,21 @@ declare -A P=(
   [assigned-secret]='(password|passwd|secret|api_?key|token)[[:space:]]*[:=][[:space:]]*["'"'"']?[A-Za-z0-9/+_-]{12,}'
 )
 
+# Reviewed false positives: "<path> <sha256 of the exact line, first 16 hex>"
+# in .githooks/secret-allowlist. Any change to the line changes its hash, so
+# the line is scanned again. Add entries only after inspecting the line masked.
+allowed() { # allowed <file> <lineno>
+  [ -f .githooks/secret-allowlist ] || return 1
+  local h; h=$(sed -n "${2}p" "$1" | sha256sum | cut -c1-16)
+  grep -qxF "${1#./} $h" .githooks/secret-allowlist
+}
+
 hits=0
 for f in $files; do
   [ -f "$f" ] || continue
   for name in "${!P[@]}"; do
-    lines=$(grep -nEio -- "${P[$name]}" "$f" 2>/dev/null | cut -d: -f1 | sort -u | tr '\n' ',' | sed 's/,$//')
+    lines=$(grep -nEio -- "${P[$name]}" "$f" 2>/dev/null | cut -d: -f1 | sort -u |
+            while read -r n; do allowed "$f" "$n" || echo "$n"; done | tr '\n' ',' | sed 's/,$//')
     if [ -n "$lines" ]; then
       echo "  ✗ $f lines $lines: $name"
       hits=1
