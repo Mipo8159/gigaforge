@@ -87,5 +87,5 @@ The goal is to *see* your own patterns change over the months.
 - **Prompt:** "define done, when user gets push notification sent when admin approves or rejects … if 2 rejects and 1 approval, 3 push notifications should be sent to the creator."
 - **Why it worked:** a concrete example with a count turned "notify on review" into a test
   (3 jobs for 3 reviews, 409 → no 4th). It drove the jobId-per-entity design and the local proof.
-- **Still missing:** env and access ("local Docker; no real device token; SDQA after push").
+- **Still missing:** env and access ("local Docker; no real device token; QA env after push").
   That came 3 prompts later and cost an extra verification round.
