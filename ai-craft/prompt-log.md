@@ -49,3 +49,15 @@ The goal is to *see* your own patterns change over the months.
   current usage from history, then propose a repo to hold it. Keep answers short."
 - **Why:** two answers went to goals the third message superseded.
 
+
+### 2026-10-02: Bug report missing the facts that decide it
+- **Before:** "QA can't update the external content, began when I started wrapping the
+  returned URL with the CDN … for a 30 minute video admin panel does not show anything,
+  AWS says key not found. diagnose, analyze, plan and resolve"
+- **After:** "SDQA, submissions 44/46: PUT returns 500 since the CDN wrapping (expected 200).
+  A 30-min upload opened in admin right after submit shows NoSuchKey; a 20-s one plays.
+  I suspect the signed URL. Access ready: SSO fresh, VPN on. Done when both work on SDQA.
+  Split it: logs in background, admin fix in a worktree."
+- **Why:** "what changed" was the best part and found bug 1 fast. IDs, the exact error and
+  "right after submit" would have removed about 10 tool calls of searching, and stating
+  access up front avoids dead ends mid-investigation.

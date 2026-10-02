@@ -43,8 +43,11 @@ does not fit, an old one has to earn its place or leave.
   money, data or infra, run the `reviewer` subagent and fix what it finds.
 - **Delegate noise.** Broad research goes to the `researcher` subagent, so the
   main context stays clean.
-- **Suggest parallelism.** When a task is independent and clear, say so in one
-  line ("this could run in a worktree while we do X").
+- **Propose the split up front.** In a multi-part task, map each phase to a tool
+  before starting: broad analysis goes to a background task or subagent, an
+  independent repo half to a worktree Giga launches, review to `reviewer`.
+  Argue what stays serial. Check access (SSO, VPN, browser) in the same batch.
+  → `brain/habits/steer-parallelism-and-agent-roles.md`
 - **Learning repos (labs) use skill `tutor`.** Giga writes the core logic; Claude
   supplies failing tests, graduated hints and review. Comprehension is the
   deliverable there.

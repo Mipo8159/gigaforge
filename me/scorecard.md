@@ -48,3 +48,4 @@ Live months come from `bin/signals-report.py` (coach hook log). Compare at each 
 | Date | Project | Done-criteria | Plan | Debug style | Proof | Subagents/parallel | Review | Giga coded |
 |---|---|---|---|---|---|---|---|---|
 | 2026-10-02 | client (onboard + price unit change) | no (Claude proposed) | yes (plan + 1 question batch) | n.a. | yes (schema script, throwaway-DB migration test) | Explore sweep, background reviewer; Giga asked for agents | yes, reviewer found rollout risks | no |
+| 2026-10-02 | client (2-bug debug, 2 repos) | no | yes (one question batch, then autonomous) | "what changed" given; no IDs/error/hypothesis | yes (SDQA logs + URL-shape check; post-deploy rerun pending) | none (serial; 2 log sweeps timed out in foreground); Giga asked for a parallelism mindset | no (diff ~21 lines) | no |
