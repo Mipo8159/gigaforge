@@ -36,11 +36,11 @@ Evidence is one dated, generalised line: no client names, URLs or schemas.
 | skill `secure-coding` | ecc | 2026-10-03 | 0.4 | — |
 | checklist `typescript` | ecc | 2026-10-03 | 0.4 | — |
 | checklist `react` | ecc | 2026-10-03 | 0.4 | — |
-| checklist `python` | ecc | 2026-10-03 | 0.5 | 2026-10-03 · own python tooling (kit/guard) · reviewer flagged real issues it lists (input validation, fail-open paths) |
+| checklist `python` | ecc | 2026-10-03 | 0.6 | 2026-10-03 · own python tooling (kit/guard) · reviewer flagged real issues it lists (input validation, fail-open paths); 2026-10-05 · client CLI exporter (stdlib) · lock/partial-file/except-path findings were real |
 | checklist `go` | ecc | 2026-10-03 | 0.4 | — |
-| checklist `database` | ecc | 2026-10-03 | 0.4 | — |
-| checklist `security` | ecc | 2026-10-03 | 0.5 | 2026-10-03 · own config/security tooling · secret-masking and unsafe-default findings were real |
-| checklist `silent-failures` | ecc | 2026-10-03 | 0.5 | 2026-10-03 · own python tooling · fail-open hook paths and swallowed errors were real findings |
+| checklist `database` | ecc | 2026-10-03 | 0.5 | 2026-10-05 · read-only MSSQL ETL · date-literal language trap, nondeterministic STRING_AGG, join-multiplied keys were real |
+| checklist `security` | ecc | 2026-10-03 | 0.6 | 2026-10-03 · own config/security tooling · secret-masking and unsafe-default findings were real; 2026-10-05 · PII exporter · unkeyed phone hash reversible, world-readable state, guard-regex bypasses were real |
+| checklist `silent-failures` | ecc | 2026-10-03 | 0.6 | 2026-10-03 · own python tooling · fail-open hook paths and swallowed errors were real findings; 2026-10-05 · cron exporter · cursor advanced on partial run (silent data loss) was a real blocker |
 | skill `contract-first` | ecc | 2026-10-03 | 0.4 | — |
 | skill `council` | ecc | 2026-10-03 | 0.4 | — |
 | skill `production-audit` | ecc | 2026-10-03 | 0.4 | — |

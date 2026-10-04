@@ -1,64 +1,50 @@
 ---
 name: secrets-land-in-readme
-description: "Inspect unknown files that may hold secrets by shape only; never print a masked copy. Giga records the commands and logins they used in a README, so secrets end up there (three times, two projects); scan any README in the diff before handover, and mask what the scan prints."
+description: "Giga records the commands and logins they used in READMEs and notes files, or pastes them into chat, so secrets end up there (5 times, 4 projects). Scan any README/notes file in the diff before handover; inspect unknown files by shape only; never print a match, even 'masked'."
 metadata:
-  node_type: memory
   type: feedback
-  modified: 2026-08-18T16:00:00.000Z
 ---
 
-**Twice now** a live `GOCSPX-…` Google client secret has been pasted into
-`auxiliary/README.md` alongside the `aws ssm put-parameter` command it belongs
-to — once on 2026-08-17 (old client) and again on 2026-08-18 (the new client,
-minutes after creating it).
+**Rule:** before handover, scan every README / notes file in the working tree
+for credentials. Report *that* something is there and where (file:line), never
+the value. Inspecting a file whose format you don't know? Print its shape, not
+its content.
 
-**Why:** the README documents the first-deploy steps, and the natural way to
-record "here is the command I ran" is to paste the command *with its arguments*.
-The secret rides along. It is a completely understandable habit, not carelessness.
+**Why:** the natural way to document "here is the command I ran" is to paste
+it with its arguments, so the secret goes along with it. It's an understandable
+habit, not carelessness, and it's not tied to one repo. Every time so far, the
+file was still untracked, so git history stayed clean. That was luck, not process.
+
+**Evidence 2026-10-04 (client DB work):** a DB username and password were pasted into chat, then put "in the
+README for now". Claude refused to use either, moved Giga to a 600 env file outside the repo, read only
+key names and lengths when debugging, and asked for rotation. It worked without Claude ever seeing the value.
 
 **How to apply:**
+1. **Known patterns:** `grep -nE 'GOCSPX|AKIA|ASIA|apps\.googleusercontent\.com|-----BEGIN|password|passwd' <file>`
+   and print **line numbers only** (`| cut -d: -f1`). Never echo the line.
+2. **Unknown file:** shape only: `wc -l`, then per line its length and the text
+   before the first `:`/`=` (`awk -F'[:=]' '{print NR, length($0), $1}'`).
+   Never print a regex-"masked" copy. A regex only masks formats you already know.
+3. **Comparing a value** (file vs SSM etc.): hash both sides, compare digests.
+4. **Fix:** redact to `'<client-secret>'` placeholders. Credentials Claude needs
+   for the work go in a `700` home-dir folder (files `600`), plus a project
+   hook that denies any tool call naming that folder.
+5. **Fetching a secret for a test:** a plugin hook blocks agent-side
+   `GetSecretValue`. Use `asm-exec` with `{{resolve:secretsmanager:...}}` if a
+   Secrets Manager Agent or the AWS MCP endpoint is reachable. If not, write the
+   probe so it prints no secret and hand Giga a one-line `! <command>`.
+   Don't route around the hook.
+6. **If a value leaks anyway**, say so in the handover and recommend rotation.
+7. Reviewer prompts at handover should include "scan READMEs / notes for secrets".
 
-1. **Always scan `README.md` before `git add`-ing it:**
-   `grep -nE 'GOCSPX|AKIA|ASIA|apps\.googleusercontent\.com|-----BEGIN' README.md`
-2. ⚠️ **Mask the match — do NOT print it.** On 2026-08-18 I ran that grep and
-   echoed the raw line, putting the live secret into the transcript and forcing
-   a rotation that was otherwise unnecessary. Print line numbers only, or pipe
-   through `sed -E 's/GOCSPX-[A-Za-z0-9_-]+/<redacted>/'`.
-3. To compare a file value against SSM, **hash both and compare digests** —
-   never print either side. That part was done correctly.
-4. Redact to `'<client-secret>'` placeholders and commit the redacted file;
-   the repo should never carry the value at all.
+**Evidence:**
+- 2026-08-17 and 08-18: a live Google client secret pasted into a lab README next
+  to its `aws ssm put-parameter` command. On 08-18 Claude's own grep echoed it
+  raw, which forced an otherwise unnecessary rotation.
+- 2026-10-02: a client repo's README held an admin password, VPN credentials and
+  user emails. The background reviewer caught it and reported it without values.
+- 2026-10-02: a remote-only workspace's notes file held a root SSH login and
+  passwords. A `key: value` sed "mask" missed two bare passwords and printed
+  them in full. That is the origin of the shape-only rule (step 2).
 
-Both times the file was still **untracked**, so git history stayed clean. That
-is luck, not process. A pre-commit hook blocking these patterns was offered and
-not yet built.
-
-Related: [[auxiliary-is-the-app-auctionize-is-legacy]],
-[[auxiliary-free-plan-blocked-four-services]]
-
-**Third time, another project (2026-10-02):** a client repo's uncommitted
-README held an environment admin password, a VPN host and password, and user
-emails. The background reviewer caught it, reported it without the values, and
-the handover told Giga to remove it before staging. So the habit isn't tied to
-one repo: **any README in the working tree gets scanned at handover**, and
-reviewer prompts should ask for it.
-
-**Fourth time, and a masking failure (2026-10-02):** a client workspace held
-only a plaintext notes file with a root SSH login, IPs and passwords. Claude
-"masked" it with a `key: value` sed regex. Two bare passwords had no separator,
-so the regex didn't match them and they printed in full. Regex masking only
-works when you already know the format, and with an unknown file you don't.
-
-**How to apply (unknown file that may hold secrets):**
-- Print **shape only**: `wc -l`, and per line its length and the text before the
-  first `:`/`=` (`awk -F'[:=]' '{print NR, length($0), $1}'`). Never print a
-  "masked" copy of the whole file.
-- If a value leaks anyway, say so in the handover and suggest rotating it.
-- Fix in that case: move the file into a 700 home-dir secrets folder (file 600),
-  and add a project hook that denies any tool call naming it.
-
-5. **Fetching a secret for a test:** a plugin hook blocks agent-side `GetSecretValue` (CLI or
-   SDK, even inside a script or container). The sanctioned path is `asm-exec` with
-   `{{resolve:secretsmanager:...}}`, but it needs a local Secrets Manager Agent or the AWS MCP
-   endpoint. When neither is reachable, don't route around the hook. Write the probe so it
-   prints no secret, and hand Giga a one-line `! <command>` to run. (2026-10-02, FCM dry-run.)
+Related: [[giga-commits-are-mine-to-make]], [[test-guards-against-innocent-lookalikes]]
