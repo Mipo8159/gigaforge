@@ -102,3 +102,16 @@ The goal is to *see* your own patterns change over the months.
   no done-line or action boundary, Claude chose both. It stopped twice to hand back outward actions
   (install, other repos), and the session ran far past the budget while review passes kept finding
   issues. A boundary line turns "may I?" stops into decisions made up front.
+
+## 2026-10-04: a "make it region bound" request (good done-line, missing scope + access)
+- **Before:** "when external content is created it should be created within the region scope … analyze,
+  plan and execute the changes, definition of done is the regionally separated external content for
+  admin to review and the reel or lesson created from them on approval." (Two prompts later: "that should
+  also include the course creation … my-channel should create them in user region".)
+- **After:** "Make external content region-bound across every entry point: submit, my-channel create,
+  admin list/get/approve/reject, reel/lesson on approve. Done when: a local run shows each admin region
+  sees only its rows, and a mismatching X-Region-ID still stores the user's region. Access: SSO valid,
+  local admin login <x>. Report what already holds before changing anything."
+- **Why:** the done-line was decidable, which is progress. But the entry points arrived one at a time, so
+  the proof ran twice, and the expired SSO and missing admin login cost a round-trip. Most of the
+  feature already existed, so "report what already holds" turns a build into a gap check.

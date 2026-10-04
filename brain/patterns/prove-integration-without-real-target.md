@@ -3,7 +3,6 @@ name: prove-integration-without-real-target
 description: "How to prove a third-party send (push/email/payment) works when no real target (device token, inbox, card) is available: build the production image, run the provider's dry-run against a broadcast target, read the error order, and check researcher claims against the installed SDK's typings."
 metadata:
   type: project
-  modified: 2026-10-02
 ---
 
 "It builds and the unit path ran" isn't "it will work when deployed." Close the gap in layers:
@@ -24,5 +23,13 @@ metadata:
 5. **Researcher answers marked "doc-knowledge" are hypotheses.** The installed SDK's `.d.ts`
    JSDoc mirrors the API reference. On 2026-10-02 it corrected the claim "unknown Android
    channel = notification dropped" (actually: FCM falls back to the manifest channel).
-6. What stays unprovable without a device: OS display (foreground handling), the iOS APNs key
+6. **Local-only layer, when no external call is allowed** (2026-10-05): run the SDK's own
+   payload validator offline on the exact message the service builds, plus a **control case**
+   it must reject (FCM: a numeric `data` value), so the check can't pass vacuously. A queue
+   with `removeOnComplete` keeps no payload to inspect, so capture the job as it is written with
+   `redis-cli MONITOR` during the run. Use targets with no tokens so the worker completes with
+   `sent:0` and nothing leaves the machine. An ORM getter can be what keeps an INTEGER id a
+   string in the payload. Name it, because deleting it breaks every send silently when the
+   send errors are swallowed.
+7. What stays unprovable without a device: OS display (foreground handling), the iOS APNs key
    in the provider console, and real token validity. Name them as owner-side checks.

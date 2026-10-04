@@ -34,12 +34,21 @@ A guard that silently passes or wrongly blocks is worse than none.
   heredoc-aware segment scanner that unwraps `bash -c`/`ssh`/`$(…)`, skips
   global options, returns **ask** (a human confirms) for destructive ops, and
   **fails closed** (ask) on unbalanced quoting or >64 KB input.
+- 2026-10-05: an onboarding audit piped commands into a guard, read the **exit
+  code**, and got "allow" for `git push` and an unguarded migration. The guard
+  was fine: it answers with JSON `permissionDecision` (deny/ask) on stdout and
+  exits 0, which is what lets it say "ask". The near-miss was a false "guard is
+  broken". The live hook also blocked the test command itself, because the
+  trigger word was in its argv. Building the commands inside a Python script avoided it.
 
 **How to apply:**
 - Test after install / inside the real repo, not only in a scratch folder.
 - Pipe sample `{"tool_input":{"command":...}}` JSON into the hook and print an
   ok/FAIL table: every deny case, every ask case, **and** look-alikes that must
   pass (`grep` for the keyword, `git log | head`, `git checkout -- file`).
+- Read the decision the way the harness does: parse `hookSpecificOutput.
+  permissionDecision` from stdout (absent = allow); exit code 2 is only the
+  legacy block path.
 - Say honestly when a hook has only been JSON-tested and has not yet fired in a
   live session. Project `.claude/settings.json` hooks have loaded mid-session
   (2026-10-02), so expect them to guard your own next command.
