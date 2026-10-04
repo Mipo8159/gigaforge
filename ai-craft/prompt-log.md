@@ -117,6 +117,6 @@ The goal is to *see* your own patterns change over the months.
   feature already existed, so "report what already holds" turns a build into a gap check.
 
 ## 2026-10-05: "build me an exporter" (good goal, no done-line, no access plan)
-- **Before:** "help me create a framework-like code, that regenerates new csv bundles needed for bitrix imports… on run fetches all the data + fresh ones… each consecutive run should fetch all the new rows… run on command and on cronjobs."
+- **Before:** "help me create a framework-like code, that regenerates new csv bundles needed for CRM imports… on run fetches all the data + fresh ones… each consecutive run should fetch all the new rows… run on command and on cronjobs."
 - **After:** "Build an incremental exporter: both ERP DBs → one CSV bundle per run (stores, sellers, products, contacts, card-receipt deals, items, store-day totals). Done when: offline tests pass, a live backfill's counts match the DB, an immediate rerun emits 0 rows, and store-day revenue equals payments per store for one day. Personal data behind a flag; history from 2025-01-01. Access: VPN up (drops ~50 min). Allowed: read-only queries, local files; ask first: anything on the server."
 - **Why:** Claude had to ask 4 option questions and write the proof list itself. The VPN drop cost two waits. Stating done, scope and access up front turns that into zero questions.
