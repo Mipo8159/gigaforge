@@ -130,3 +130,8 @@ The goal is to *see* your own patterns change over the months.
 - **Before:** "plan ahead, to guide me with hints and appropriate suggestion on how better utilize claude along the way, in order to cover up and fill all the gaps which now exists. constantly evaluate and keep track of my interraction and try to move me to the perfection"
 - **After:** "Turn the gaps from your assessment into a roadmap at ~3 h/week. Done when: me/roadmap.md lists each gap with a due date and a proof, the coach hook shows the current step every session, and /retro moves it. Use the existing scorecard for tracking, no new tracker. Targets: scorecard dims, not 'perfection'."
 - **Why:** "perfection" and "constantly evaluate" can't be checked, so Claude had to invent the targets and ask 4 questions (pace, plugin go/no-go, coaching strength, domains). Naming pace and tracking place up front leaves only the real decisions to ask.
+
+## 2026-10-05: "new channel should be isPublished:true out of the box" (clear, missing reach)
+- **Before:** "help me fix on more thing. when user creates his own channel via my-channel endpoint, it should be isPublished:true out of the box"
+- **After:** "New creator channels start isPublished:true. Existing unpublished channels: backfill yes/no (local only; SDQA ask first). Empty channels in public lists: OK / hide until first lesson. Done when tsc + eslint are clean."
+- **Why:** the change was one line and needed no questions. But a default flip always raises two more decisions: rows that already exist, and what becomes visible. Claude had to hand both back as open questions at the end.
