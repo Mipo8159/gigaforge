@@ -6,13 +6,13 @@ else, or a doc, get it). Raise a level only on evidence, and record the evidence
 
 | Concept | Track | Level | Evidence | Next step |
 |---|---|---|---|---|
-| Kafka topics / partitions / consumer groups | messaging | seen | issue-flow step 00 (Claude-built) | exercises A–G, then explain back |
-| Dual-write problem | messaging | seen | issue-flow step 00 exercises B, D | build outbox in step 01 (tutor) |
-| Transactional outbox | messaging | seen | theory | **build**: issue-flow step 01 |
-| Inbox / idempotent consumer | messaging | seen | theory | issue-flow step 02 |
-| Retries + DLQ | messaging | seen | theory | issue-flow step 03 |
-| CQRS | messaging | seen | theory | issue-flow step 05 |
-| Saga (choreography vs orchestration) | distributed | seen | earlier `saga` repo | issue-flow step 07 |
+| Kafka topics / partitions / consumer groups | messaging | seen | issue-flow step 00 (Claude-built) | re-learn in tracker step 2 (issue-flow deleted 2026-10-06) |
+| Dual-write problem | messaging | seen | issue-flow step 00 exercises B, D | tracker step 2–3 (tutor) |
+| Transactional outbox | messaging | seen | theory | **build**: tracker step 3 |
+| Inbox / idempotent consumer | messaging | seen | theory | tracker step 4 |
+| Retries + DLQ | messaging | seen | theory | tracker step 6 |
+| CQRS | messaging | seen | theory | tracker step 8 |
+| Saga (choreography vs orchestration) | distributed | seen | earlier `saga` repo | tracker step 10 |
 | Hexagonal architecture | design | build | mogulkhan slices, auxiliary ports/adapters | teach: write the "why" in your own words |
 | DI with decorator metadata (SWC) | node | build | auctionize esbuild → SWC fix | — |
 | Serverless on AWS (Lambda, DynamoDB, Cognito) | aws | build | auxiliary deployed 2026-08-18 | explain: single-table design aloud |
@@ -25,3 +25,6 @@ else, or a doc, get it). Raise a level only on evidence, and record the evidence
 | Context engineering (CLAUDE.md, memory, skills) | ai | explain | built gigaforge with Claude | build: own skill with evals |
 | Agent orchestration (subagents, background review, worktrees, hooks as guards) | ai | seen | 2026-10-02: asked how agents/hooks/skills were used; saw a background reviewer catch a rollout risk | build: launch a worktree session yourself for a parallel half |
 | Agent loops / tool use / MCP | ai | seen | `mcp/` teaching server | build: finish the README syllabus |
+| Optimistic concurrency (version compare-and-set, lost update) | data | seen | 2026-10-06: tracker step 0 visual + e2e race test (Claude-built) | explain: answer the step-0 check-yourself questions |
+| Monolith-first service extraction (strangler) | distributed | seen | 2026-10-06: chose "monolith, then extract" for tracker | build: tracker step 1 (users/auth → gRPC) |
+| State machine as a pure domain function | design | seen | 2026-10-06: tracker workflow.ts spec handed over | **build**: implement workflow.ts (tutor) |

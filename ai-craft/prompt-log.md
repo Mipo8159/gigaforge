@@ -135,3 +135,9 @@ The goal is to *see* your own patterns change over the months.
 - **Before:** "help me fix on more thing. when user creates his own channel via my-channel endpoint, it should be isPublished:true out of the box"
 - **After:** "New creator channels start isPublished:true. Existing unpublished channels: backfill yes/no (local only; SDQA ask first). Empty channels in public lists: OK / hide until first lesson. Done when tsc + eslint are clean."
 - **Why:** the change was one line and needed no questions. But a default flip always raises two more decisions: rows that already exist, and what becomes visible. Claude had to hand both back as open questions at the end.
+
+## 2026-10-06: "generate a new nestjs project … step by step" (rich goal, three tasks, no done-line)
+- **Before:** "please generate a new nestjs project, all is missue, this project should be split and evolved piece by piece … users, issues, audit-logs, search, analytcs, devices … Nestjs, kafka, sagas, postgres, elasticsearch … grpc for auth checks, clickhouse … another goal is to improve our gigaforge, which should definately be onboarded … teach me how to write better promps along the way"
+- **After:** "New Nest lab `newEra/tracker`, Jira domain, stack: <list>. Monolith first, one pattern per step, animated artifact per step. I write each step's core; you scaffold, test, visualise. Step 0 done when: compose + e2e green, an invalid transition returns 409, the artifact is published, kit doctor clean. ~3 h/week. issue-flow: delete after porting. Ask first: anything outside the repo."
+- **Why:** the stack and domain were complete, so one question batch was enough. Missing were the done-line, who codes, the pace, and the repo name. "all is missue" was unreadable, and issue-flow was deleted before anything could be ported from it.
+
